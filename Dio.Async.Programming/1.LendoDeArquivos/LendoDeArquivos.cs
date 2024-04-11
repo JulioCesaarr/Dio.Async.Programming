@@ -1,4 +1,6 @@
-﻿namespace Dio.Async.Programming;
+﻿using System.Runtime.InteropServices;
+
+namespace Dio.Async.Programming;
 
 internal class LendoDeArquivos
 {
@@ -6,9 +8,15 @@ internal class LendoDeArquivos
 
     public static void LerArquivo()
     {
+        using var reader = File.OpenText(_path);
+        var retorno = reader.ReadToEnd();
+        Console.WriteLine(retorno);
     }
 
     public static async Task LerArquivoAsync()
     {
+        using var reader = File.OpenText(_path);
+        var retorno = await reader.ReadToEndAsync();
+        await Console.Out.WriteLineAsync(retorno);
     }    
 }
